@@ -1,0 +1,70 @@
+
+<main role="main" class="container">
+
+	<div class="starter-template">
+	<h1 class="display-3">Vote for your peers</h1>
+	</div>
+
+	<div class="card-group">
+	  <div class="card text-center">
+	    <img class="card-img-top" src="img/student-login.jpg" alt="Student Login">
+	    <div class="card-body">
+	      <h4 class="card-title">Student</h4>
+	      <p class="card-text lead">Log in to view your peer's websites and vote for your favorites.</p>
+			<a href="/student-login" class="btn btn-primary">Student Portal</a>
+	    </div>
+	  </div>
+	  <div class="card text-center">
+	    <img class="card-img-top" src="img/instructor-login.jpg" alt="Instructor TA Login">
+	    <div class="card-body">
+	      <h4 class="card-title">Instructor/TAs</h4>
+	      <p class="card-text lead">Log in to vote and download CSV files of the final voting polls.</p>
+			<a href="/instructor-login" class="btn btn-primary">Instructor Portal</a>
+	    </div>
+	  </div>
+	  <div class="card text-center">
+	    <img class="card-img-top" src="img/upload-csv.jpg" alt="Upload CSV">
+	    <div class="card-body">
+	      <h4 class="card-title">CSV Upload</h4>
+	      <p class="card-text lead">Upload your list of users, passwords, and roles to get started!</p>
+			
+		  <a href="" id="f-input-btn" class="btn btn-primary"><i class="fa fa-upload fa-2x" aria-hidden="true"></i></a>
+
+		<div id="success-msg" class="alert alert-success" role="alert">
+		<i class="fa fa-check-square-o" aria-hidden="true"></i>
+		  CSV File successfully uploaded!<br>
+		  Users may now log in with their credentials.
+		</div>
+
+		  <div id="error-msg" class="alert alert-danger" role="alert">
+			  Uh oh! Something went wrong... <i class="fa fa-frown-o" aria-hidden="true"></i> <br>
+			  Please check that your CSV file is in the correct format: <br><br>
+			  <em>
+			  	  username, password, role<br>
+			  	  bob,      abc123,   student<br>
+			  	  joe,      321123,   ta<br>
+			  	  jim,      qwerty,   instructor<br>
+			  </em>
+		  </div>
+
+		  <div id="correct-file-msg" class="alert alert-info" role="alert">
+		  	<i class="fa fa-file-text-o" aria-hidden="true"></i>
+		  	  <span></span>
+		  </div>
+
+		  <div id="invalid-file-msg" class="alert alert-warning" role="alert">
+		  	<i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+			  Please upload a CSV file with the following format: <br><em>username, password, role</em>
+		  </div>
+
+	      <form id="csv-upload-form">
+	      	<input id="f-input" type="file" name="file" value="">
+	      	<button id="f-submit" class="btn btn-primary" type="submit">Upload</button>
+	      </form>
+
+	    </div>
+	  </div>
+	</div>
+
+</main><!-- /.container -->
+
