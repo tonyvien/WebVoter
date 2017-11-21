@@ -4,7 +4,7 @@ Peer Review Web App Project for Web Applications.
 # Description
 A web site that will allow for students to view and rate (first, second, and third) for their favorite bootstrap website of the various student submitted sites
 
-# ToDo
+# To Do:
 - Your web app, must store usernames and passwords in an SQL database.
 - The passwords must be salted and hashed.
 - There needs to be at least 2 roles - one for students allowing them to vote, and one for instructors/tas.
