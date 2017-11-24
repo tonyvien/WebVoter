@@ -1,0 +1,12 @@
+Using ERB: 
+https://learn.co/lessons/sinatra-using-erb
+
+General Sinatra Docs:
+http://recipes.sinatrarb.com/
+
+SQLite3 Docs:
+http://www.rubydoc.info/gems/sqlite3/1.3.11/SQLite3
+
+
+Bcrypt Docs:
+https://github.com/codahale/bcrypt-ruby

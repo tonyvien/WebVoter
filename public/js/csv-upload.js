@@ -50,6 +50,13 @@ $(document).ready(()=>{
         data: formData,
         contentType: false,
         processData: false,
+        beforeSend: function() {
+          hideMessages();
+          $('#loader').fadeIn(250);
+        },
+        complete: function() {
+          $('#loader').fadeOut(250);
+        },
         success: function(data){
           $f_submit.hide();
           $f_correct_msg.hide();

@@ -45,6 +45,14 @@ body {
 	display: none;
 }
 
+#loader {
+  display: none;
+  height: 55px; 
+  width: auto; 
+  position: relative; 
+  margin: 0 auto;
+}
+
 #success-msg, 
 #correct-file-msg, 
 #error-msg, 

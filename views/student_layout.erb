@@ -27,54 +27,24 @@
       </button>
 
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Vote</a>
+      </li>
+    </ul>
 
-        <% if @uid %>
-
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="/">Dashboard <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">View</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Vote</a>
-            </li>
-          </ul>
-
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" href="/logout">Logout <i class="fa fa-sign-in" aria-hidden="true"></i></a>
-            </li>
-          </ul>
-
-        <% else %>
-
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Features</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Pricing</a>
-            </li>
-          </ul>
-
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" href="/student-login">Student <i class="fa fa-sign-in" aria-hidden="true"></i></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/instructor-login">Instructor/TA <i class="fa fa-sign-in" aria-hidden="true"></i></a>
-            </li>
-          </ul>
-
-        <% end %>
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="/student-login">Logout<i class="fa fa-sign-in" aria-hidden="true"></i></a>
+          </li>
+        </ul>
 
       </div>
     </nav>
+
 
 
     <%= yield %>
