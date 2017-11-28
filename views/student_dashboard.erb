@@ -1,0 +1,23 @@
+<h1 class="display-2 text-center">Welcome, <%= @username %>!</h1>
+
+<!-- Display Websites Below --> 
+
+<h2 class="display-4 text-center">Vote below</h2>
+<p class="lead text-center">Vote for your 1st, 2nd, and 3rd top favorite websites and submit your choices below. <br>
+<strong>Note: </strong><em>You can resize each website to test for its responsiveness by dragging the bottom right iframe window. Give it a try!</em>
+</p>
+
+<div id="invalid-ws-msg" class="container text-center">
+	<div class="alert alert-warning" role="alert">
+		<i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+	  Your instructor hasn't uploaded any websites yet! Please notify your TA/Instructor to upload them to begin voting.
+	</div>
+</div>
+
+<div id="loading-box">
+	<img id="ws-loader" src="img/loader.gif">
+</div>
+
+<div id="sites" class="container">
+
+</div>
