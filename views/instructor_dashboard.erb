@@ -1,0 +1,77 @@
+<div class="container">
+	<h1 class="display-2 text-center">Welcome, <%= @username %>!</h1>
+
+	<div class="card-deck">
+	  <div class="card text-center">
+
+	    <div class="card-body">
+	      <h4 class="card-title">View Polls</h4>
+	      <p class="card-text">View or download the current polls for your class.</p>
+	    </div>
+	  </div>
+	  <div class="card text-center">
+
+	    <div class="card-body">
+	      <h4 class="card-title">Upload ZIP</h4>
+
+	      <p class="card-text">Upload your ZIP file containing the the websites (Required for voting)</p>
+
+	      <!-- Upload ZIP file form -->
+		  <a href="" id="f-input-btn" class="btn btn-primary"><i class="fa fa-upload fa-2x" aria-hidden="true"></i></a>
+
+		  <img id="loader" src="img/loader.gif">
+
+			<div id="success-msg" class="alert alert-success" role="alert">
+			<i class="fa fa-check-square-o" aria-hidden="true"></i>
+			  ZIP File successfully uploaded!<br>
+			  Users may now view and vote for their favorite website!
+			</div>
+
+		  <div id="error-msg" class="alert alert-danger" role="alert">
+			  Uh oh! Something went wrong... <i class="fa fa-frown-o" aria-hidden="true"></i> <br>
+			  Please check that your ZIP file contains a valid file/folder structure. <br><br>
+		  </div>
+
+		  <div id="correct-file-msg" class="alert alert-info" role="alert">
+		  	<i class="fa fa-file-text-o" aria-hidden="true"></i>
+		  	  <span></span>
+		  </div>
+
+		  <div id="invalid-file-msg" class="alert alert-warning" role="alert">
+		  	<i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+			  Please upload a ZIP file.
+		  </div>
+
+	      <form id="zip-upload-form">
+	      	<input id="zip-f-input" type="file" name="file" value="">
+	      	<button id="f-submit" class="btn btn-primary" type="submit">Upload</button>
+	      </form>
+
+	    </div>
+	  </div>
+	</div>
+</div>
+
+
+<!-- Display Websites Below --> 
+
+
+<h2 class="display-4 text-center">Vote below</h2>
+<p class="lead text-center">Vote for your 1st, 2nd, and 3rd top favorite websites and submit your choices below. <br>
+<strong>Note: </strong><em>You can resize each website to test for its responsiveness by dragging the bottom right iframe window. Give it a try!</em>
+</p>
+
+<div id="invalid-ws-msg" class="container text-center">
+	<div class="alert alert-warning" role="alert">
+		<i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+	  You haven't uploaded any websites yet! Please upload them above to begin voting.
+	</div>
+</div>
+
+<div id="loading-box">
+	<img id="ws-loader" src="img/loader.gif">
+</div>
+
+<div id="sites" class="container">
+
+</div>

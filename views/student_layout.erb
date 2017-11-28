@@ -27,51 +27,24 @@
       </button>
 
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Vote</a>
+      </li>
+    </ul>
 
-        <% if @uid %>
-
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="/">Dashboard <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Vote</a>
-            </li>
-          </ul>
-
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" href="/logout">Logout <i class="fa fa-sign-in" aria-hidden="true"></i></a>
-            </li>
-          </ul>
-
-        <% else %>
-
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Features</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Pricing</a>
-            </li>
-          </ul>
-
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" href="/student-login">Student <i class="fa fa-sign-in" aria-hidden="true"></i></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/instructor-login">Instructor/TA <i class="fa fa-sign-in" aria-hidden="true"></i></a>
-            </li>
-          </ul>
-
-        <% end %>
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="/student-login">Logout<i class="fa fa-sign-in" aria-hidden="true"></i></a>
+          </li>
+        </ul>
 
       </div>
     </nav>
+
 
 
     <%= yield %>
@@ -88,8 +61,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 
-  <!-- Custom Scripts -->
-  <script src="js/load-sites.js"></script>
-  <script src="js/file-upload.js"></script>
+  <!-- Custom Script -->
+  <script src="js/csv-upload.js"></script>
   </body>
 </html>
