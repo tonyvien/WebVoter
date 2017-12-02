@@ -2,10 +2,11 @@
 <main role="main" class="container">
 
 	<div class="starter-template">
-	<h1 class="display-3">Vote for your peers</h1>
+		<h1 class="display-3">Vote for your peers</h1>
+		<a href="/pricing"><button  style="margin: 30px auto 0px auto; cursor: pointer;" type="button" class="btn btn-outline-primary btn-lg">View Pricing Plans</button></a>
 	</div>
 
-	<div class="card-group">
+	<div style="margin-bottom: 100px;" class="card-group">
 	  <div class="card text-center">
 	    <img class="card-img-top" src="img/student-login.jpg" alt="Student Login">
 	    <div class="card-body">
@@ -27,7 +28,7 @@
 	    <div class="card-body">
 	      <h4 class="card-title">CSV Upload</h4>
 	      <p class="card-text lead">Upload your list of users, passwords, and roles to get started!</p>
-			
+
 		  <a href="" id="f-input-btn" class="btn btn-primary"><i class="fa fa-upload fa-2x" aria-hidden="true"></i></a>
 
 		  <img id="loader" src="img/loader.gif">
@@ -41,12 +42,11 @@
 		  <div id="error-msg" class="alert alert-danger" role="alert">
 			  Uh oh! Something went wrong... <i class="fa fa-frown-o" aria-hidden="true"></i> <br>
 			  Please check that your CSV file is in the correct format: <br><br>
-			  <em>
-			  	  username, password, role<br>
+			  <strong>
+			  	  username, password, role</strong><br>
 			  	  bob,      abc123,   student<br>
 			  	  joe,      321123,   ta<br>
 			  	  jim,      qwerty,   instructor<br>
-			  </em>
 		  </div>
 
 		  <div id="correct-file-msg" class="alert alert-info" role="alert">
@@ -69,4 +69,3 @@
 	</div>
 
 </main><!-- /.container -->
-

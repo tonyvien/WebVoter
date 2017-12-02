@@ -14,9 +14,9 @@ def openDB()
 		db.execute( "CREATE TABLE Class (id INTEGER PRIMARY KEY, user TEXT, password TEXT, role TEXT);" )
 		# Add an extra columns for the user's vote status, 1st, 2nd, and 3rd vote
 		db.execute ("ALTER TABLE Class ADD COLUMN has_voted INTEGER DEFAULT 0; ")
-		db.execute ("ALTER TABLE Class ADD COLUMN first_choice TEXT DEFAULT 'NONE'; ")
-		db.execute ("ALTER TABLE Class ADD COLUMN second_choice TEXT DEFAULT 'NONE'; ")
-		db.execute ("ALTER TABLE Class ADD COLUMN third_choice TEXT DEFAULT 'NONE'; ")
+		db.execute ("ALTER TABLE Class ADD COLUMN first_choice TEXT DEFAULT 'n/a'; ")
+		db.execute ("ALTER TABLE Class ADD COLUMN second_choice TEXT DEFAULT 'n/a'; ")
+		db.execute ("ALTER TABLE Class ADD COLUMN third_choice TEXT DEFAULT 'n/a'; ")
 	else
 		db = SQLite3::Database.open( "./webvoter.database" )
 	end
@@ -120,7 +120,10 @@ def verifyUser(username, password, role)
 end
 
 
-
+# This function loads in the sites by grabbing the html file's
+# directory path. It stores the path in a array as a string and
+# returns it to the client side to serve the site. The site
+# order is also randomized when shown to the user.
 def getSites()
 	ws = []
 	#gets all the html files located in the 'public/ws' folder
@@ -131,7 +134,10 @@ def getSites()
 end
 
 
-
+# This function processes a user's vote. The user's id, first,
+# second, and third choices are passed in to update the table.
+# The function will return true if the update was sucessful,
+# and false if the user has already voted.
 def processVote(uid, first, second, third)
 	db = openDB()
 	# Checks if the user has voted. voteStatus should be 0 if user hasn't voted yet
@@ -139,10 +145,7 @@ def processVote(uid, first, second, third)
 	# If the user hasn't voted yet, update their choices and flag that they voted.
 	if(voteStatus == 0)
 		db.execute("UPDATE Class 
-					SET has_voted=1, 
-						first_choice='#{first}',
-						second_choice='#{second}',
-						third_choice='#{third}'
+					SET has_voted=1, first_choice='#{first}',second_choice='#{second}',third_choice='#{third}'
 					WHERE id=#{uid}")
 		return true
 	else
@@ -151,3 +154,38 @@ def processVote(uid, first, second, third)
 	end
 end
 
+
+
+# This function loads in the the current polls and sends the 
+# data back as an array of hashes. The entire array will then
+# be transformed into stringified JSON and parsed via client side
+def getPolls()
+	p_arr = []
+	db = openDB()
+	current_polls = db.execute('SELECT user, first_choice, second_choice, third_choice FROM Class')
+
+	current_polls.each { |user|
+		p_hash = Hash.new
+		p_hash[:user] = user[0]
+		p_hash[:first] = user[1]
+		p_hash[:second] = user[2]
+		p_hash[:third] = user[3]
+
+		p_arr.push(p_hash)
+	}
+	return p_arr
+end
+
+
+# Updates (or creates) the Class CSV file. The default 
+# CSV file path is located at "public/ws/class_votes.csv"
+def updateCSV()
+	db = openDB()
+	users = db.execute("SELECT * FROM Class") 
+
+	CSV.open('./public/ws/class_votes.csv', 'wb', :write_headers => true, :headers => ["USER_ID","USERNAME","PASSWORD", "ROLE", "HAS_VOTED", "FIRST_CHOICE", "SECOND_CHOICE", "THIRD_CHOICE"]) { |csv|
+		users.each do |user|
+			csv << user
+		end
+	}
+end

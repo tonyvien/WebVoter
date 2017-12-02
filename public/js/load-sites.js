@@ -1,12 +1,14 @@
-//Invoke loadSites() to retrieve websites
-loadSites();
+//Invoke loadSites() if HTML document has a div with "sites" ID to retrieve websites
+var sites = document.getElementById('sites');
+if( sites !== null ){
+	loadSites();
+}
 
 /*************************************************************************/
 /*************************************************************************/
 /******************************* FUNCTIONS *******************************/
 /*************************************************************************/
 /*************************************************************************/
-
 
 // This function simply trims the site/team/student (The folder) name
 // from the "src" path. 
@@ -19,13 +21,13 @@ function trimSiteName(sname){
 }
 
 
-// This function retrieves all of the websites via an ajax POST request
+// This function retrieves all of the websites via an ajax GET request
 // and grabs any existing websites on the server. If there are no websites
 // then display a warning message to upload a zip file.
 function loadSites(){
 	let $sites = $('#sites');
 	$.ajax({
-		type: 'POST',
+		type: 'GET',
 		url: '/get-sites',
         beforeSend: function() {
           $('#invalid-ws-msg').hide();
@@ -35,6 +37,9 @@ function loadSites(){
           $('#loading-box').fadeOut(250);
         },
 		success: function(data){
+			// Reset html to prevent duplicated appendage
+			$sites.html('');
+
 			if(data!=="[]"){
 				// Convert data string as an array
 				let ws_arr = data.replace(/[\]\[,"]/g, '').split(' ');

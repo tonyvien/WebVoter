@@ -1,5 +1,6 @@
+require 'json'
 require 'sinatra'
-require 'sinatra/reloader' if development?
+# require 'sinatra/reloader' if development?
 load './utilities.rb'
 # Required for login sessions
 enable :sessions
@@ -8,10 +9,13 @@ enable :sessions
 
 before do
 	# Save routes in arrays
-	@publicRoutes = ['/', '/student-login', '/instructor-login']
-	@userRoutes = ['/student-dashboard', '/instructor-dashboard']
+	@publicRoutes = ['/', '/pricing', '/student-login', '/instructor-login']
+	@studentRoutes = ['/student-dashboard']
+	@instructorRoutes = ['/instructor-dashboard', '/current-polls']
+	@userRoutes = @studentRoutes + @instructorRoutes
+
 	# get the current page route for page privileges
-	@currentRoute = request.path_info 
+	@currentRoute = request.path_info
 
 	@uid = nil || session[:uid]
 	@username = nil || session[:username]
@@ -35,6 +39,7 @@ helpers do
 	end
 
 	# Redirects user from non-user pages (home, login, etc.)
+	# Also prevent students from going to instructor pages and vice versa
 	def userRedirect()
 		if @publicRoutes.include? @currentRoute
 			if @role == "student"
@@ -42,6 +47,10 @@ helpers do
 			elsif @role == "instructor"
 				redirect '/instructor-dashboard'
 			end
+		elsif(@role == "student" and @instructorRoutes.include? @currentRoute)
+			redirect '/student-dashboard'
+		elsif (@role == "instructor" and @studentRoutes.include? @currentRoute)
+			redirect '/instructor-dashboard'
 		end
 	end
 
@@ -54,6 +63,15 @@ helpers do
 end
 
 
+=begin
+	######################################################
+	######################################################
+	################ Public Route handlers ###############
+	######################################################
+	######################################################
+=end
+
+
 
 get '/' do
 	erb :index, :layout => :main_layout
@@ -61,9 +79,15 @@ end
 
 
 
+get '/pricing' do
+	erb :pricing, :layout => :main_layout
+end
+
+
+
 post '/' do
 	file = File.new(params[:file][:tempfile], 'r')
-	# isSuccessful will be a boolean. true if everything 
+	# isSuccessful will be a boolean. true if everything
 	# was successfully added in csv function, false otherwise...
 	isSuccessful = importCSV(file.path);
 	return isSuccessful.to_s
@@ -151,25 +175,22 @@ end
 
 post '/instructor-dashboard' do
 	file = File.new(params[:file][:tempfile], 'r')
-	# isSuccessful will be a boolean. true if everything 
-	# was successfully added in csv function, false otherwise...
+	# isSuccessful will be a boolean. true if everything
+	# was successfully added in csv function, false otherwise.
 	isSuccessful = importZIP(file.path);
 	return isSuccessful.to_s
 end
 
 
 
-post '/get-sites' do
+get '/get-sites' do
 	# websites holds a string array containing a relative path to each html file
 	websites = getSites()
+
+	# shuffles the website order each time before sending it to the client
+	websites.shuffle!
+
 	return websites.to_s
-end
-
-
-
-get '/logout' do
-	session.clear
-	redirect '/'
 end
 
 
@@ -179,7 +200,45 @@ post '/vote' do
 	# data holds a json object of the voting results
 	# e.g. {first: 'ws1', second: 'ws2', third: 'ws3'}
 	data = JSON.parse(request.body.read.to_s)
-	# Pass uid and first, second, and third choices to process vote
+
 	isVoteSuccessful = processVote(@uid, data['first'], data['second'], data['third'])
+
 	return isVoteSuccessful.to_s
+end
+
+
+
+get '/current-polls' do
+	erb :polls, :layout => :main_layout
+end
+
+
+
+# get the polls (user and the first, second, and third choices)
+get '/get-polls' do
+	polls = getPolls()
+	return polls.to_json
+end
+
+
+
+get '/download-polls' do
+	# update the csv before hand
+	updateCSV()
+	return 'ws/class_votes.csv'
+end
+
+
+
+# Clear Session
+get '/logout' do
+	session.clear
+	redirect '/'
+end
+
+
+
+# URL Page not found redirect s
+error Sinatra::NotFound do
+	erb :not_found, :layout => :main_layout
 end

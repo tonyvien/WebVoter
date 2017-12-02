@@ -1,0 +1,7 @@
+source 'https://rubygems.org'
+gem 'sinatra'
+gem 'json'
+gem 'csv'
+gem 'zip'
+gem 'bcrypt'
+gem 'sqlite3'
